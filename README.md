@@ -1,99 +1,107 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API GraphQL de Pets com NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Neste projeto, eu demonstro como construir uma API GraphQL utilizando **NestJS**, com integração de banco de dados para gerenciar dados de **Pets** e **Donos**. A API inclui a criação de tipos GraphQL, consultas, mutações, validação e a implementação de relacionamento entre **Pet** e **Owner**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tópicos Abordados
 
-## Description
+### 1. **Gerar o Módulo de Pets**
+A primeira coisa que fiz foi criar o módulo **Pets** utilizando o NestJS CLI. Isso me ajudou a organizar toda a lógica de negócios relacionada aos pets na API.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 2. **Code First vs Schema First**
+- **Code First**: Eu optei pelo modelo **Code First**, onde os tipos GraphQL são definidos diretamente no código. Isso facilitou a integração com a lógica de negócios.
+- **Schema First**: Caso fosse necessário, poderia usar o modelo **Schema First**, onde o schema GraphQL é definido antes de implementarmos a lógica, criando o arquivo `.graphql`.
 
-## Project setup
+### 3. **Importação do Módulo GraphQL**
+Para integrar o GraphQL à minha aplicação NestJS, eu configurei e importei o módulo **GraphQL**. Esse passo é essencial para que a API GraphQL funcione corretamente.
 
-```bash
-$ npm install
-```
+### 4. **Criando o Tipo de Objeto Pet**
+Eu criei o tipo de objeto **Pet** no código. Esse tipo descreve como os dados de um pet devem ser estruturados e retornados pela API.
 
-## Compile and run the project
+### 5. **Escrevendo a Primeira Consulta no Resolver**
+A partir disso, escrevi meu primeiro resolver, responsável por processar a consulta GraphQL e retornar os dados de pets de acordo com a solicitação.
 
-```bash
-# development
-$ npm run start
+### 6. **Testando a Nova Consulta**
+Depois de implementar a consulta no resolver, realizei os testes para garantir que a consulta estivesse funcionando corretamente e retornasse as informações dos pets como esperado.
 
-# watch mode
-$ npm run start:dev
+---
 
-# production mode
-$ npm run start:prod
-```
+## PARTE II: Integração com Banco de Dados
 
-## Run tests
+### 7. **Entidade Pet no Banco de Dados**
+Criei a entidade **Pet** no banco de dados usando o TypeORM. Isso me permitiu mapear os dados de um pet na base de dados relacional.
 
-```bash
-# unit tests
-$ npm run test
+### 8. **Atualizando o PetsService para Utilizar o Banco de Dados**
+Modifiquei o **PetsService** para que ele utilizasse o banco de dados, utilizando o TypeORM para manipular as entidades de **Pet** e realizar operações de CRUD (criar, ler, atualizar e deletar) de forma persistente.
 
-# e2e tests
-$ npm run test:e2e
+### 9. **Implementação de createPet**
+Implementei a funcionalidade de criação de um novo pet no banco de dados. Isso envolve receber os dados de entrada, validar as informações e persistir os dados no banco de dados.
 
-# test coverage
-$ npm run test:cov
-```
+### 10. **Escrevendo um Tipo de Entrada (Input Type)**
+Criei um **Input Type** para estruturar os dados que serão enviados pelo cliente para criar um novo pet. Esse tipo é essencial para garantir que os dados estejam no formato correto.
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## PARTE III: Mutações
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 11. **Configuração de Validação**
+Configurei a validação de entrada para garantir que os dados fornecidos sejam válidos antes de serem salvos no banco de dados. Para isso, utilizei a biblioteca **class-validator**.
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+### 12. **Implementando a Consulta findOne**
+Implementei a consulta **findOne** para buscar um único pet no banco de dados com base no seu **ID**. Agora, é possível buscar informações detalhadas de um pet específico.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 13. **Como Gerar Automaticamente Todo o Boilerplate**
+Aprendi como automatizar a geração de código básico usando o NestJS CLI. Isso me ajudou a acelerar o desenvolvimento de resolvers, entidades e serviços, economizando tempo e esforço.
 
-## Resources
+### 14. **Entidade Owner no Banco de Dados**
+Criei a entidade **Owner** no banco de dados para mapear as informações do dono de cada pet. Isso foi fundamental para o relacionamento entre **Pet** e **Owner**.
 
-Check out a few resources that may come in handy when working with NestJS:
+### 15. **Implementando o Relacionamento Pet/Owner**
+Implementei o relacionamento entre **Pet** e **Owner**, garantindo que cada pet tenha um dono associado. Isso também permite realizar consultas para obter dados relacionados.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 16. **Capacidade de Adicionar Informações do Dono Junto com a Consulta do Pet**
+Modifiquei a consulta de **Pet** para incluir as informações do **Owner**. Agora é possível obter os dados completos do pet e seu dono em uma única consulta.
 
-## Support
+### 17. **Implementando a Consulta para Obter o Dono do Pet**
+Por fim, implementei uma consulta específica para retornar as informações sobre o **dono** de um pet, usando o ID do pet para buscar os dados do dono.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## Como Rodar o Projeto
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/highlander08/-PETSHOP---API-PARA-CADASTRAR-ANIMAIS.git
 
-## License
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd nome-do-repositorio
+   
+3. Instale as dependências:
+   ```bash
+   npm install
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+4. Execute a aplicação:
+   ```bash
+   npm run start:dev
+
+Testando a API: 
+
+```endpoint
+http://localhost:3000/graphql
+
+```graphql
+query {
+  pets {
+    name
+    id
+    owner {
+      name
+    }
+  }
+}
+
+
+
+
+
+
